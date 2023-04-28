@@ -9,12 +9,7 @@ import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
 
-import InputLogin from '../../components/InputLogin';
-import ButtonLogin from '../../components/ButtonLogin';
-
-import logoImg from '../../assets/image001.png';
-
-import { Container, Content, AnimationContainer, Background } from './styles';
+import { Container, Header, Logo, Title, ButtonLogin, Footer } from './styles';
 
 
 interface SignInFormData{
@@ -32,75 +27,114 @@ const SignIn: React.FC = () => {
     const { addToast } = useToast();
 
 
-    const handleSubmit = useCallback(async (data: SignInFormData) => {
-        try{
-            formRef.current?.setErrors({});
-            const schema = Yup.object().shape({
-                email: Yup.string().required('E-mail obrigatorio').email('Digite um e-mail válido'),
-                password: Yup.string().required('Senha obrigatoria'),
-            });
+    // const handleSubmit = useCallback(async (data: SignInFormData) => {
+    //     try{
+    //         formRef.current?.setErrors({});
+    //         const schema = Yup.object().shape({
+    //             email: Yup.string().required('E-mail obrigatorio').email('Digite um e-mail válido'),
+    //             password: Yup.string().required('Senha obrigatoria'),
+    //         });
 
-            await schema.validate(data, {
-                abortEarly: false,
-            });
+    //         await schema.validate(data, {
+    //             abortEarly: false,
+    //         });
 
-            await signIn({
-                email: data.email,
-                password: data.password,
-            });
+    //         await signIn({
+    //             email: data.email,
+    //             password: data.password,
+    //         });
 
-            addToast({
-                type: 'sucess',
-                title: 'Login Realizado',
-            });
+    //         addToast({
+    //             type: 'sucess',
+    //             title: 'Login Realizado',
+    //         });
 
-            history.push('/dashboard');
+    //         history.push('/dashboard');
 
-        }catch(err){
-            if (err instanceof Yup.ValidationError){
-                const errors = getValidationErrors(err as Yup.ValidationError);
-                formRef.current?.setErrors(errors);
-            }
+    //     }catch(err){
+    //         if (err instanceof Yup.ValidationError){
+    //             const errors = getValidationErrors(err as Yup.ValidationError);
+    //             formRef.current?.setErrors(errors);
+    //         }
 
-            addToast({
-                type: 'error',
-                title: 'Erro na autenticação',
-                description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
-            });
+    //         addToast({
+    //             type: 'error',
+    //             title: 'Erro na autenticação',
+    //             description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+    //         });
 
-        }
+    //     }
 
-    }, [signIn, addToast, history],);
-
-
+    // }, [signIn, addToast, history],);
 
     return (
-        <Container>
-
-            <Content>
-                <AnimationContainer>
-                    <img src={logoImg} alt="GoBaber" />
-
-                    <Form ref={formRef} onSubmit={handleSubmit}>
-                        <h1>Faça seu Logisssssssssssn</h1>
-
-                        <InputLogin name='email' icon={FiMail} placeholder= "E-mail" />
-
-                        <InputLogin name='password' icon={FiLock} type='password' placeholder = "Senha" />
-
-                        <ButtonLogin type= "submit">Entrar</ButtonLogin>
-
-                        <Link to="/forgot-password">Esqueci minha senha</Link>
-                    </Form>
-
-                    <Link to="/signup">
-                        <FiLogIn/>
-                        Criar conta
-                    </Link>
-                </AnimationContainer>
-            </Content>
-            <Background />
-        </Container>
+      <Container>
+        <Header>
+          <Logo>
+            igordev
+          </Logo>
+          <Title>
+            <ul>
+              <li>
+                <span>architecture team</span>
+              </li>
+            </ul>
+          </Title>
+          <ButtonLogin>entrar</ButtonLogin>
+        </Header>
+        <div className="wrapper">
+          <main>
+            <section className="module parallax parallax-1">
+              <h1>architecture team</h1>
+            </section>
+            <section className="module content">
+              <div className="container">
+                <h2>Architecture team</h2>
+                <p>
+                  Architecture team é um grupo com apenas um objetivo, criar soluções de design e construção mais eficientes, inovadoras e sustentáveis para atender às necessidades e demandas dos seus clientes.
+                </p>
+                <p>
+                  Trabalhando em equipe, podemos combinar habilidades e conhecimentos para projetar espaços que maximizem o uso do espaço, a funcionalidade e a estética, levando em consideração questões de segurança, acessibilidade, conforto ambiental e uso de materiais e tecnologias sustentáveis.
+                </p>
+              </div>
+            </section>
+            <section className="module parallax parallax-2">
+              <h1>sustentabilidade</h1>
+            </section>
+            <section className="module content">
+              <div className="container">
+                <h2>Responsabilidade ambiental</h2>
+                <p>
+                  Buscamos minimizar o impacto ambiental em nossos projetos, visando a preservação do meio ambiente. Consequentemente, solucionamos maneiras de economia de recursos usando materiais sustentáveis e eficiente.
+                </p>
+                <p>
+                  A sustentabilidade exige que nossos arquitetos busquem soluções criativas e inovadoras para problemas ambientais, levando a projetos mais interessantes e desafiadores, possibilitando novas ideias e técnicas.
+                </p>
+                </div>
+            </section>
+            <section className="module parallax parallax-3" />
+            {/* <section className="module content">
+              <div className="container">
+              <Footer>
+                <div className="containerF">
+                  <div className="logo-container">
+                    <a href="https://www.facebook.com/" rel="noopener">
+                      <img src="facebook-logo.png" alt="Facebook"/>
+                    </a>
+                    <a href="https://twitter.com/" rel="noopener">
+                      <img src="twitter-logo.png" alt="Twitter"/>
+                    </a>
+                    <a href="https://www.instagram.com/" rel="noopener">
+                      <img src="instagram-logo.png" alt="Instagram"/>
+                    </a>
+                  </div>
+                </div>
+              </Footer>
+              </div>
+            </section> */}
+          </main>
+        </div>
+      </Container>
     );
 }
 
