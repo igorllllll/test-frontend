@@ -82,7 +82,7 @@ const SignIn: React.FC = () => {
                     <img src={logoImg} alt="GoBaber" />
 
                     <Form ref={formRef} onSubmit={handleSubmit}>
-                        <h1>Faça seu Login</h1>
+                        <h1>Faça seu Logisssssssssssn</h1>
 
                         <InputLogin name='email' icon={FiMail} placeholder= "E-mail" />
 
@@ -101,9 +101,6 @@ const SignIn: React.FC = () => {
             </Content>
             <Background />
         </Container>
-
-
-
     );
 }
 
